@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">12_AppRelogio</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="teste">Teste Default</string>
+    <string name="nivel_de_bateria">Nivel de bateria</string>
+</resources>

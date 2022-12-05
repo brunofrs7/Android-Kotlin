@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dummy_button">Botão Fictício</string>
+    <string name="dummy_content">Fictício</string>
+    <string name="teste">Teste PT</string>
+    <string name="nivel_de_bateria">Nivel de bateria</string>
+</resources>
