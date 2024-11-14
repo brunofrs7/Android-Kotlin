@@ -1,6 +1,10 @@
 package com.example.a16_room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface UserDAO {
@@ -20,5 +24,3 @@ interface UserDAO {
     @Query("SELECT * FROM User")
     fun getAll(): List<UserModel>
 }
-
-

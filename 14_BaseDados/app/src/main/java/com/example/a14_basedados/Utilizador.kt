@@ -6,5 +6,3 @@ class Utilizador(val id: Int = 0, val username: String = "", val password: Strin
         return "Utilizador(id=$id, username='$username', password='$password')"
     }
 }
-
-

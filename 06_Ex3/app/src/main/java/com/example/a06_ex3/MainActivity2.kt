@@ -1,32 +1,33 @@
 package com.example.a06_ex3
 
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.a06_ex3.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMain2Binding
+    private val binding by lazy { ActivityMain2Binding.inflate(layoutInflater) }
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private var username = "user"
     private var password = "pass"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMain2Binding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         binding.buttonLogin.setOnClickListener {
-            var i = Intent(this, LoginActivity::class.java)
+            val i = Intent(this, LoginActivity::class.java)
             i.putExtra("user", username)
             i.putExtra("pass", password)
             startActivity(i)
@@ -35,7 +36,7 @@ class MainActivity2 : AppCompatActivity() {
             startActivity(Intent(this, SobreActivity::class.java))
         }
         binding.buttonRegisto.setOnClickListener {
-            var i = Intent(this, RegistoActivity::class.java)
+            val i = Intent(this, RegistoActivity::class.java)
             i.putExtra("user", username)
             i.putExtra("pass", password)
             resultLauncher.launch(i)
@@ -50,6 +51,5 @@ class MainActivity2 : AppCompatActivity() {
                     }
                 }
             }
-
     }
 }

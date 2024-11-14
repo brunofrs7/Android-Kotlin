@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-
     private var textWelcome = MutableLiveData<String>()
 
     init {
@@ -16,5 +15,3 @@ class MainViewModel : ViewModel() {
         return textWelcome
     }
 }
-
-

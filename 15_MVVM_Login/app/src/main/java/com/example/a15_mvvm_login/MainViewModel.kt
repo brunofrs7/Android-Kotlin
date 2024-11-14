@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-
     private var login = MutableLiveData<Boolean>()
     private val personRepository = PersonRepository()
 
@@ -16,6 +15,4 @@ class MainViewModel : ViewModel() {
     fun doLogin(email: String, password: String) {
         login.value = personRepository.login(email, password)
     }
-
 }
-

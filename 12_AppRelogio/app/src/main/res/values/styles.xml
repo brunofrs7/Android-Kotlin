@@ -1,10 +1,10 @@
 <resources>
 
-    <style name="Widget.Theme.12_AppRelogio.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+    <style name="Widget.Theme._12_AppRelogio.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
 
-    <style name="Widget.Theme.12_AppRelogio.ButtonBar.Fullscreen" parent="">
+    <style name="Widget.Theme._12_AppRelogio.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>

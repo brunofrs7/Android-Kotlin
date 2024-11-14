@@ -1,18 +1,27 @@
 package com.example.a14_ex2
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.a14_ex2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         val db = DBHelper(this)
 
         var pos = -1
@@ -20,18 +29,18 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaAluno)
         binding.listView.adapter = adapter
 
-        binding.textContador.setText("Existem ${listaAluno.size} alunos")
+        binding.textContador.text = "Existem ${listaAluno.size} alunos"
 
-        binding.listView.setOnItemClickListener { adapterView, view, i, l ->
-            binding.editNome.setText(listaAluno.get(i).nome)
-            binding.editEmail.setText(listaAluno.get(i).email)
+        binding.listView.setOnItemClickListener { _, _, i, _ ->
+            binding.editNome.setText(listaAluno[i].nome)
+            binding.editEmail.setText(listaAluno[i].email)
             pos = i
         }
 
         binding.buttonInserir.setOnClickListener {
             val nome = binding.editNome.text.toString()
             val email = binding.editEmail.text.toString()
-            if (nome.trim().equals("") || email.trim().equals("")) {
+            if (nome.trim() == "" || email.trim() == "") {
                 Toast.makeText(this, "Preencha nome e email para inserir", Toast.LENGTH_SHORT)
                     .show()
             } else {
@@ -39,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 if (res > 0) {
                     listaAluno.add(Aluno(res.toInt(), nome, email))
                     Toast.makeText(this, "Aluno criado com sucesso", Toast.LENGTH_SHORT).show()
-                    binding.textContador.setText("Existem ${listaAluno.size} alunos")
+                    binding.textContador.text = "Existem ${listaAluno.size} alunos"
                 } else {
                     Toast.makeText(this, "Erro ao criar aluno", Toast.LENGTH_SHORT).show()
                 }
@@ -51,14 +60,14 @@ class MainActivity : AppCompatActivity() {
                 val id = listaAluno.get(pos).id
                 val nome = binding.editNome.text.toString()
                 val email = binding.editEmail.text.toString()
-                if (nome.trim().equals("") || email.trim().equals("")) {
+                if (nome.trim() == "" || email.trim() == "") {
                     Toast.makeText(this, "Preencha nome e email para editar", Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     val res = db.update(id, nome, email)
                     if (res > 0) {
-                        listaAluno.get(pos).nome = nome
-                        listaAluno.get(pos).email = email
+                        listaAluno[pos].nome = nome
+                        listaAluno[pos].email = email
                         Toast.makeText(this, "Aluno editado com sucesso", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, "Erro ao editar aluno", Toast.LENGTH_SHORT).show()
@@ -76,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 if (res > 0) {
                     listaAluno.removeAt(pos)
                     Toast.makeText(this, "Aluno editado com sucesso", Toast.LENGTH_SHORT).show()
-                    binding.textContador.setText("Existem ${listaAluno.size} alunos")
+                    binding.textContador.text = "Existem ${listaAluno.size} alunos"
                 } else {
                     Toast.makeText(this, "Erro ao editar aluno", Toast.LENGTH_SHORT).show()
                 }

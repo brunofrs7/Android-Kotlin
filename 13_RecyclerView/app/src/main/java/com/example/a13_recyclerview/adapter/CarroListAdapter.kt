@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a13_recyclerview.R
 import com.example.a13_recyclerview.model.Carro
 
-class CarroListAdapter(val listaCarro: ArrayList<Carro>, val onClickListener: OnClickListener) :
+class CarroListAdapter(private val listaCarro: ArrayList<Carro>, private val onClickListener: OnClickListener) :
     RecyclerView.Adapter<CarroListAdapter.CarroViewHolder>() {
 
     var contadorOnCreate = 0
@@ -43,5 +43,4 @@ class CarroListAdapter(val listaCarro: ArrayList<Carro>, val onClickListener: On
     override fun getItemCount(): Int {
         return listaCarro.size
     }
-
 }

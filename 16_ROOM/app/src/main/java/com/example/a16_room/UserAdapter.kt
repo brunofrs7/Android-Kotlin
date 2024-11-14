@@ -1,14 +1,30 @@
 package com.example.a16_room
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a16_room.databinding.RowUserBinding
 
-class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
-
+class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     private var userList: List<UserModel> = listOf()
     private lateinit var listener: OnUserListener
+
+
+    interface OnUserListener {
+        fun OnClick(id: Int)
+    }
+
+    class UserViewHolder(private val bind: RowUserBinding, private val listener: OnUserListener) :
+        RecyclerView.ViewHolder(bind.root) {
+        fun bind(user: UserModel) {
+            bind.textUsername.text = user.username
+
+            bind.textUsername.setOnClickListener {
+                listener.OnClick(user.id)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val item = RowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)

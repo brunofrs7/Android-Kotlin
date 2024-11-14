@@ -1,37 +1,26 @@
 package com.example.a12_apprelogio
 
-import androidx.appcompat.app.AppCompatActivity
-import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.opengl.Visibility
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.a12_apprelogio.databinding.ActivityFullscreenBinding
-import java.util.*
 
 class FullscreenActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFullscreenBinding
+    private val binding by lazy { ActivityFullscreenBinding.inflate(layoutInflater) }
     private var isChecked = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityFullscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

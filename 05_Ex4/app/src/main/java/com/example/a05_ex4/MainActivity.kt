@@ -1,18 +1,26 @@
 package com.example.a05_ex4
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.a05_ex4.databinding.ActivityMainBinding
-import java.lang.Math.sqrt
+import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         binding.buttonVerificar.setOnClickListener {
             val numero = binding.editNumero.text.toString().toInt()
@@ -29,11 +37,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
 
-    private fun isPrime(num: Int): Boolean {
-        if (num <= 1) return false
+private fun isPrime(num: Int): Boolean {
+    if (num <= 1) return false
 
-        for (i in 2..sqrt(num.toDouble()).toInt()) if (num % i == 0) return false
-        return true
-    }
+    for (i in 2..sqrt(num.toDouble()).toInt()) if (num % i == 0) return false
+    return true
 }

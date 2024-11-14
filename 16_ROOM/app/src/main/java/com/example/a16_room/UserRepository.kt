@@ -1,10 +1,6 @@
 package com.example.a16_room
 
 import android.content.Context
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
 
 class UserRepository(context: Context) {
 

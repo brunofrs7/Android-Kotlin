@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-
     private val repository = UserRepository(application.applicationContext)
 
     private val listUsers = MutableLiveData<List<UserModel>>()
@@ -49,5 +48,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         changes.value = repository.delete(model).toLong()
     }
-
 }
